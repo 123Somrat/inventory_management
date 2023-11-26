@@ -16,6 +16,7 @@ const navigate = useNavigate()
 
   const { register, handleSubmit,reset,formState: { errors } } = useForm();
   const onSubmit = (data) =>{
+  
        createUser(data)
        .then(res=>{
         // show alert after succesfully created user
@@ -25,11 +26,12 @@ const navigate = useNavigate()
           icon: "success"
         });
         // gethering user info from firebase response to store user data in users collection 
+         const userName = data.username;
          const email =res?.user?.email
          const createdAt  = res?.user?.metadata?.creationTime
          const lastLogin = res?.user?.metadata?.lastSignInTime
          //create user object to send db
-         const user = {email, createdAt , lastLogin}
+         const user = {userName , email , createdAt , lastLogin}
          
          // save user data on database
          axiosPublic.post("/users",user)
