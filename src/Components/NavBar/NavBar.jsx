@@ -43,7 +43,7 @@ export default function NavBar() {
           </Link>
           <Link to={"/auth/login"} className="hover:text-cyan-800">Login</Link>
           <Link to="/auth/register" className="hover:text-cyan-800">Register</Link>
-          <Link to="/createstore" className="hover:text-cyan-800">Create Store</Link>
+          <Link to="/createshop" className="hover:text-cyan-800">Create Store</Link>
           <Link to="/watchdemo" className="hover:text-cyan-800">Watch Demo</Link>
         </Navbar.Collapse>
       </Navbar>

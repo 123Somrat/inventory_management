@@ -2,15 +2,51 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/Providers";
+import useAxios from "../../Hooks/useAxios";
+import Swal from "sweetalert2";
+
 export default function Register() {
 
   // import createUser method from authContect
  const {createUser} = useContext(AuthContext)
+// useing axiosbase instance for sendind data on db
+ const axiosPublic = useAxios();
+const navigate = useNavigate()
 
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = data =>{
+
+  const { register, handleSubmit,reset,formState: { errors } } = useForm();
+  const onSubmit = (data) =>{
        createUser(data)
-       .then(res=>console.log(res))
+       .then(res=>{
+        // show alert after succesfully created user
+        Swal.fire({
+          title: "Success!",
+          text: "user created successfully!",
+          icon: "success"
+        });
+        // gethering user info from firebase response to store user data in users collection 
+         const email =res?.user?.email
+         const createdAt  = res?.user?.metadata?.creationTime
+         const lastLogin = res?.user?.metadata?.lastSignInTime
+         //create user object to send db
+         const user = {email, createdAt , lastLogin}
+         
+         // save user data on database
+         axiosPublic.post("/users",user)
+         // navigate user to createshop route after register
+         .then(data=>navigate("/createshop" ))
+
+       })
+       .catch(err=>Swal.fire({
+           title : "error",
+           text:`${err.message}`,
+           icon: "error"
+       }))
+
+
+
+       // reset form
+       reset()
   };
 
 
