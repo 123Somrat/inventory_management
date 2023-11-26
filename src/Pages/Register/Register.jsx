@@ -2,10 +2,6 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Register() {
-    const navigate= useNavigate()
-    const handleSubmit = (e)=>{
-         e.preventDefault() 
-    }
   return (
     <div className="max-w-6xl mx-auto m-8">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 dark:bg-gray-900 dark:text-gray-100 mx-auto m-8">
@@ -15,18 +11,18 @@ export default function Register() {
             Register in to access our feature
           </p>
         </div>
-        <form onSubmit={handleSubmit} className="space-y-12">
+        <form className="space-y-12">
           <div className="space-y-4">
             <div>
               <label htmlFor="email" className="block mb-2 text-sm">
-               UserName
+                UserName
               </label>
               <input
                 type="text"
                 name="username"
                 id="username"
                 placeholder="mohammad"
-                className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
+                className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-cyan-700"
               />
             </div>
             <div>
@@ -38,7 +34,7 @@ export default function Register() {
                 name="email"
                 id="email"
                 placeholder="leroy@jenkins.com"
-                className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
+                className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-cyan-700"
               />
             </div>
             <div>
@@ -52,7 +48,7 @@ export default function Register() {
                 name="password"
                 id="password"
                 placeholder="*****"
-                className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
+                className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-cyan-700"
               />
             </div>
           </div>
@@ -60,7 +56,7 @@ export default function Register() {
             <div>
               <button
                 type="submit"
-                className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 dark:text-gray-900"
+                className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 dark:text-gray-900 bg-cyan-600 hover:bg-cyan-800 text-white"
               >
                 Register
               </button>
@@ -70,7 +66,7 @@ export default function Register() {
               have an account?
               <Link
                 to={"/login"}
-                className="hover:underline dark:text-violet-400"
+                className="hover:underline text-cyan-700 dark:text-violet-400 underline"
               >
                 Login
               </Link>
