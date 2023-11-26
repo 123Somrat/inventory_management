@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import auth from "../FirebaseConfig/FireBaseConfig";
-import { createUserWithEmailAndPassword , signInWithEmailAndPassword , signOut} from "firebase/auth";
+import { createUserWithEmailAndPassword , signInWithEmailAndPassword , signOut , onAuthStateChanged} from "firebase/auth";
 import Swal from "sweetalert2";
 import { Navigate } from "react-router-dom";
 // create context
@@ -42,7 +42,7 @@ useEffect(()=>{
 
 
 
-
+console.log(user)
 
 // signout user
 
@@ -54,9 +54,12 @@ const logOut = () =>{
          text: "Signout successfully!",
          icon: "success"
        });
-       <Navigate to={"/login"} />
+       
        setUser(null)
-   }).catch(err=>{
+    
+      
+   })
+   .catch(err=>{
       Swal.fire({
          title: "error!",
          text: `${err.message}`,

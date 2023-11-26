@@ -1,17 +1,17 @@
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import { useContext } from "react";
 import { MdOutlineInventory } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/Providers";
 export default function NavBar() {
 const {logOut} = useContext(AuthContext)
-
+const navigate = useNavigate()
   const signOut = () =>{
     // call logout component
        logOut()
-    
 
-
+    // redirect user to login page after logout
+      navigate("/auth/login")
   }
   return (
     <div>

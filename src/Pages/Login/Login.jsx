@@ -2,8 +2,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/Providers";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 export default function Login() {
-
+ const navigate = useNavigate()
   // useing login user method from authcontext
   const {loginUser} = useContext(AuthContext)
 
@@ -15,7 +16,22 @@ export default function Login() {
        loginUser(email,password)
 
        // todo : have to navigate dasjboard
-       .then(res=>console.log(res))
+       .then(res=>{
+        Swal.fire({
+          title: "Success!",
+          text: "User login successfully!",
+          icon: "success"
+        });
+        navigate("/createshop")
+      }).catch(err=>{
+        Swal.fire({
+          title: "error!",
+          text: `${err.message}`,
+          icon: "error"
+        });
+
+
+      })
 
 
   };
