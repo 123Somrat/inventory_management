@@ -1,9 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/Providers";
 export default function Register() {
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
+  // import createUser method from authContect
+ const {createUser} = useContext(AuthContext)
+
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const onSubmit = data =>{
+       createUser(data)
+       .then(res=>console.log(res))
+  };
 
 
 
