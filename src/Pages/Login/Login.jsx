@@ -1,14 +1,29 @@
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/Providers";
 import { useContext } from "react";
-
+import { useForm } from "react-hook-form";
 export default function Login() {
-  
+
+  // useing login user method from authcontext
+  const {loginUser} = useContext(AuthContext)
+
+ // useing useForm hook from react hook form
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+
+  const onSubmit = data => {
+       const {email,password}= data
+       loginUser(email,password)
+
+       // todo : have to navigate dasjboard
+       .then(res=>console.log(res))
+
+
+  };
   return (
     <div className="max-w-6xl mx-auto flex justify-center items-center m-12">
       <div className="w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100">
         <h1 className="text-2xl font-bold text-center">Login</h1>
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div className="space-y-1 text-sm">
             <label htmlFor="username" className="block dark:text-gray-400">
               Email
@@ -19,7 +34,9 @@ export default function Login() {
               id="email"
               placeholder="Email"
               className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-cyan-700"
+              {...register("email",{required:true})}
             />
+          {errors.email && <span className="text-red-700 mt-2 block ml-1">email is required</span>}
           </div>
           <div className="space-y-1 text-sm">
             <label htmlFor="password" className="block dark:text-gray-400">
@@ -31,7 +48,9 @@ export default function Login() {
               id="password"
               placeholder="Password"
               className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-cyan-700"
+              {...register("password",{required:true})}
             />
+             {errors.password && <span className="text-red-700 mt-2 block ml-1">password required</span>}
             <div className="flex justify-end text-xs dark:text-gray-400">
               <a rel="noopener noreferrer" href="#">
                 Forgot Password?
