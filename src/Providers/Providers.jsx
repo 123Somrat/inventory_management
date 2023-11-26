@@ -3,6 +3,7 @@ import auth from "../FirebaseConfig/FireBaseConfig";
 import { createUserWithEmailAndPassword , signInWithEmailAndPassword , signOut , onAuthStateChanged} from "firebase/auth";
 import Swal from "sweetalert2";
 import { Navigate } from "react-router-dom";
+import useUserhaveStoreOrNot from "../Hooks/useUserhaveStoreOrNot";
 // create context
 export const AuthContext = createContext();
 
@@ -27,6 +28,7 @@ useEffect(()=>{
   const unSubscribe =  onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user)
+       
       } else {
         // User is signed out
         // ...
@@ -42,7 +44,7 @@ useEffect(()=>{
 
 
 
-console.log(user)
+
 
 // signout user
 

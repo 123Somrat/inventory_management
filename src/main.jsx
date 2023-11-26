@@ -4,11 +4,17 @@ import { RouterProvider } from "react-router-dom";
 import "./index.css";
 import router from "./Router/Router.jsx";
 import Providers from "./Providers/Providers.jsx";
+import { QueryClientProvider,QueryClient} from "@tanstack/react-query";
+
+// craete queryClient
+const queryClient = new QueryClient()
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Providers>
-      <RouterProvider router={router} />
-    </Providers>
+    <QueryClientProvider client={queryClient}>
+      <Providers>
+        <RouterProvider router={router} />
+      </Providers>
+    </QueryClientProvider>
   </React.StrictMode>
 );

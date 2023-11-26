@@ -3,8 +3,12 @@ import { AuthContext } from "../../Providers/Providers";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import useUserhaveStoreOrNot from "../../Hooks/useUserhaveStoreOrNot";
 export default function Login() {
  const navigate = useNavigate()
+   const hasStore = useUserhaveStoreOrNot();
+
+
   // useing login user method from authcontext
   const {loginUser} = useContext(AuthContext)
 
@@ -22,7 +26,8 @@ export default function Login() {
           text: "User login successfully!",
           icon: "success"
         });
-        navigate("/createshop")
+        // checking useing has store or not
+       Array.isArray(hasStore) ?navigate("/createshop") : navigate("/dashboard")
       }).catch(err=>{
         Swal.fire({
           title: "error!",

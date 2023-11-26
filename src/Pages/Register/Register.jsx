@@ -124,7 +124,7 @@ const navigate = useNavigate()
               {" "}
               have an account?
               <Link
-                to={"/login"}
+                to={"/auth/login"}
                 className="hover:underline text-cyan-700 dark:text-violet-400 underline"
               >
                 Login
