@@ -4,6 +4,8 @@ import Home from "../Components/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import CreateShop from "../Pages/CreateShop/CreateShop";
+import SideNavBar from "../Components/SideNavBar/SideNavBar";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 
 const router = createBrowserRouter([
@@ -17,7 +19,7 @@ const router = createBrowserRouter([
       },
       {
          path:"/createshop",
-         element:<CreateShop/>
+         element:<PrivateRoute><CreateShop/></PrivateRoute>
       },
       {
         path:"/auth/login",
@@ -30,7 +32,10 @@ const router = createBrowserRouter([
       
     ],
   },
-
+  {
+    path : "/dashboard",
+    element : <SideNavBar/>
+  }
 
 ]);
 

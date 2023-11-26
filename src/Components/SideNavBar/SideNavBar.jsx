@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function SideNavBar() {
   return (
-    <div className="mr-12">
+    <div className="max-w-6xl mx-auto mt-12">
       <div className="flex flex-col border-2  p-3 w-60  dark:text-black-100">
         <div className="space-y-3">
           <div className="flex items-center justify-between">
