@@ -1,6 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Providers/Providers";
+import { useContext } from "react";
 
 export default function Login() {
+  
   return (
     <div className="max-w-6xl mx-auto flex justify-center items-center m-12">
       <div className="w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100">
