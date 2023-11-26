@@ -1,7 +1,18 @@
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
+import { useContext } from "react";
 import { MdOutlineInventory } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Providers/Providers";
 export default function NavBar() {
+const {logOut} = useContext(AuthContext)
+
+  const signOut = () =>{
+    // call logout component
+       logOut()
+    
+
+
+  }
   return (
     <div>
       <Navbar fluid rounded>
@@ -29,11 +40,11 @@ export default function NavBar() {
                 name@flowbite.com
               </span>
             </Dropdown.Header>
-            <Dropdown.Item>Dashboard</Dropdown.Item>
-            <Dropdown.Item>Settings</Dropdown.Item>
+            <Dropdown.Item><Link to={"/dashboard"}>Dashboard</Link></Dropdown.Item>
+            <Dropdown.Item><Link to={""}>Settings</Link></Dropdown.Item>
             <Dropdown.Item>Earnings</Dropdown.Item>
             <Dropdown.Divider />
-            <Dropdown.Item>Sign out</Dropdown.Item>
+            <Dropdown.Item onClick={signOut}>Sign out</Dropdown.Item>
           </Dropdown>
           <Navbar.Toggle />
         </div>
