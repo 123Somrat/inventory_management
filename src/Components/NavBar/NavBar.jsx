@@ -6,6 +6,8 @@ import { AuthContext } from "../../Providers/Providers";
 export default function NavBar() {
 const {logOut,user} = useContext(AuthContext)
 const navigate = useNavigate()
+
+// signout user
   const signOut = () =>{
     // call logout component
        logOut()
@@ -13,6 +15,10 @@ const navigate = useNavigate()
     // redirect user to login page after logout
       navigate("/auth/login")
   }
+
+
+
+
   return (
     <div>
       <Navbar fluid rounded>
@@ -55,7 +61,7 @@ const navigate = useNavigate()
           {user ? <p className="hover:text-cyan-800" onClick={signOut}>Logout</p> : <Link to={"/auth/login"} className="hover:text-cyan-800">Login</Link> }
           {user ?<Link to={"/dashboard"} className="hover:text-cyan-800">Dashboard</Link> :  <Link to="/auth/register" className="hover:text-cyan-800">Register</Link>}
           <Link to="/createshop" className="hover:text-cyan-800">Create Store</Link>
-          <Link to="/watchdemo" className="hover:text-cyan-800">Watch Demo</Link>
+          <Link  to="/watchdemo" target="_blank" className="hover:text-cyan-800" >Watch Demo</Link>
         </Navbar.Collapse>
       </Navbar>
     </div>

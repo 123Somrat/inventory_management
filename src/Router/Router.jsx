@@ -6,6 +6,7 @@ import Register from "../Pages/Register/Register";
 import CreateShop from "../Pages/CreateShop/CreateShop";
 import SideNavBar from "../Components/SideNavBar/SideNavBar";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import WatchDemo from "../Pages/WatchDemo/WatchDemo";
 
 
 const router = createBrowserRouter([
@@ -35,7 +36,12 @@ const router = createBrowserRouter([
   {
     path : "/dashboard",
     element : <SideNavBar/>
+  },
+  {
+    path : "/watchdemo",
+    element : <WatchDemo/>
   }
+
 
 ]);
 
