@@ -8,6 +8,8 @@ import SideNavBar from "../Components/SideNavBar/SideNavBar";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import WatchDemo from "../Pages/WatchDemo/WatchDemo";
 import NotFound from "../Pages/NotFound/NotFound";
+import { MdDashboard } from "react-icons/md";
+import DashboardLayout from "../LayOuts/DashboardLayout";
 
 
 const router = createBrowserRouter([
@@ -39,8 +41,17 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path : "/dashboard",
-    element : <SideNavBar/>
+    path : "dashboard",
+    element : <DashboardLayout/>,
+    children : [
+     {
+       path : "addproduct",
+       element:<h1>prodcut add page</h1>
+     }
+
+
+
+    ]
   },
   {
     path : "/watchdemo",

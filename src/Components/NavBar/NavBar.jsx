@@ -46,7 +46,7 @@ const navigate = useNavigate()
                 name@flowbite.com
               </span>
             </Dropdown.Header>
-            <Dropdown.Item><Link to={"/dashboard"}>Dashboard</Link></Dropdown.Item>
+            <Dropdown.Item><Link to={"dashboard"}>Dashboard</Link></Dropdown.Item>
             <Dropdown.Item><Link to={""}>Settings</Link></Dropdown.Item>
             <Dropdown.Item>Earnings</Dropdown.Item>
             <Dropdown.Divider />

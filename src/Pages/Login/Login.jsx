@@ -7,7 +7,7 @@ import useUserhaveStoreOrNot from "../../Hooks/useUserhaveStoreOrNot";
 export default function Login() {
  const navigate = useNavigate()
    const hasStore = useUserhaveStoreOrNot();
-
+   
 
   // useing login user method from authcontext
   const {loginUser} = useContext(AuthContext)
