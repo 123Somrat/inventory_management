@@ -7,6 +7,7 @@ import CreateShop from "../Pages/CreateShop/CreateShop";
 import SideNavBar from "../Components/SideNavBar/SideNavBar";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import WatchDemo from "../Pages/WatchDemo/WatchDemo";
+import NotFound from "../Pages/NotFound/NotFound";
 
 
 const router = createBrowserRouter([
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path:"/auth/register",
         element:<Register/>
+      },
+      {
+        path:"*",
+        element:<NotFound/>
       }
       
     ],
@@ -40,7 +45,8 @@ const router = createBrowserRouter([
   {
     path : "/watchdemo",
     element : <WatchDemo/>
-  }
+  },
+  
 
 
 ]);
