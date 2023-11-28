@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Providers/Providers";
 
 export default function SideNavBar() {
+  const {user} = useContext(AuthContext)
+  const userName = user?.email.slice(0,6)
   return (
-    <div className="max-w-6xl mx-auto mt-12">
-      <div className="flex flex-col border-2  p-3 w-60  dark:text-black-100">
+    <div className="max-w-6xl mx-auto">
+      <div className="flex flex-col shadow-sm p-3 w-60  dark:text-black-100">
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <h2>Dashboard</h2>
@@ -184,7 +187,7 @@ export default function SideNavBar() {
             className="w-12 h-12 rounded-lg dark:bg-gray-500"
           />
           <div>
-            <h2 className="text-lg font-semibold">Leroy Jenkins</h2>
+            <h2 className="text-lg font-semibold">{userName}</h2>
             <span className="flex items-center space-x-1">
               <a
                 rel="noopener noreferrer"

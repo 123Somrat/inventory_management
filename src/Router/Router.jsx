@@ -10,6 +10,7 @@ import WatchDemo from "../Pages/WatchDemo/WatchDemo";
 import NotFound from "../Pages/NotFound/NotFound";
 import { MdDashboard } from "react-icons/md";
 import DashboardLayout from "../LayOuts/DashboardLayout";
+import AddProduct from "../Components/AddProduct/AddProduct";
 
 
 const router = createBrowserRouter([
@@ -46,7 +47,7 @@ const router = createBrowserRouter([
     children : [
      {
        path : "addproduct",
-       element:<h1>prodcut add page</h1>
+       element:<AddProduct/>
      }
 
 
