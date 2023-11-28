@@ -11,6 +11,7 @@ import NotFound from "../Pages/NotFound/NotFound";
 import { MdDashboard } from "react-icons/md";
 import DashboardLayout from "../LayOuts/DashboardLayout";
 import AddProduct from "../Components/AddProduct/AddProduct";
+import ProductSection from "../Components/ProductSection/ProductSection";
 
 
 const router = createBrowserRouter([
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
      {
        path : "addproduct",
        element:<AddProduct/>
+     },
+     {
+      path : "productsection",
+      element:<ProductSection/>
      }
 
 
