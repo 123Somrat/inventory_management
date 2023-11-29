@@ -61,6 +61,7 @@ export default function UpdateProduct() {
                text: "Product updated successfully!",
                icon: "success"
             })
+            reset() 
         }
     }catch(err){
         Swal.fire({
@@ -72,15 +73,9 @@ export default function UpdateProduct() {
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes"
           })
+          reset()
     }
-   
-        
-    
-    
-      
-     
-
-         
+       
     
   };
 

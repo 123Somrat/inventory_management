@@ -10,7 +10,7 @@ export default function AddProduct() {
      const {user} = useContext(AuthContext);
      const axiosbase = useAxiosSecure();
      const navigate =useNavigate();
-    const { register, handleSubmit, watch, formState: { errors } } =useForm();
+    const { register, handleSubmit, reset, formState: { errors } } =useForm();
     const url =  `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGEBB_APIKEY }`
     
     const onSubmit = async (data) =>{
@@ -52,6 +52,7 @@ export default function AddProduct() {
                icon: "success"
             })
         }
+        reset()
        }
        catch(err){
         Swal.fire({
