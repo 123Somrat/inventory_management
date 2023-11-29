@@ -79,7 +79,7 @@ export default function ProductSection() {
          <Table.Cell className='text-center' >{product.productquantity}</Table.Cell>
          <Table.Cell className='text-center'>{product.saleCount}</Table.Cell>
          <Table.Cell>
-           <Link to={"update"} className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+           <Link to={`update/${product._id}`} className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
            <FaUserEdit className='w-[34px] h-[32px] text-cyan-600'/>
            </Link>
          </Table.Cell>

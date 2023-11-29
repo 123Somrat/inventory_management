@@ -12,6 +12,7 @@ import { MdDashboard } from "react-icons/md";
 import DashboardLayout from "../LayOuts/DashboardLayout";
 import AddProduct from "../Components/AddProduct/AddProduct";
 import ProductSection from "../Components/ProductSection/ProductSection";
+import UpdateProduct from "../Components/UpdateProduct/UpdateProduct";
 
 
 const router = createBrowserRouter([
@@ -55,8 +56,10 @@ const router = createBrowserRouter([
       element:<ProductSection/>
      },
      {
-      path:"productsection/update",
-      element:<h1>product update page</h1>
+      path:"productsection/update/:id",
+      element:<UpdateProduct />,
+      loader : ({params}) =>fetch(`http://localhost:3000/products/${params.id}`)
+
      }
 
 
