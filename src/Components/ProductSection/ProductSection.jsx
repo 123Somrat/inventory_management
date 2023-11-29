@@ -1,8 +1,11 @@
 import React, { useContext, useState } from 'react'
 import useAxiosSecure from '../../Hooks/useAxiosSecure'
 import { AuthContext } from '../../Providers/Providers'
-
+import { MdOutlineDelete } from "react-icons/md";
+import { FaUserEdit } from "react-icons/fa";
 import { Table } from "flowbite-react";
+import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export default function ProductSection() {
     const axiosbaseUrl = useAxiosSecure()
@@ -11,6 +14,41 @@ export default function ProductSection() {
     // getting product data from axios
      axiosbaseUrl.get(`/products?email=${user?.email}`)
      .then(res=>setProduct(res.data))
+
+ const deleteItem = (id) =>{
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then(async(result) => {
+        if (result.isConfirmed) {
+          const res= await axiosbaseUrl.delete(`/products/${id}`)
+            if(res.data.deletedCount>0){
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                     icon: "success"
+                    });
+            }
+        }
+      }).catch(err=>{
+        Swal.fire({
+            title: "error!",
+            text: "Opps some thing wronng",
+             icon: "error"
+            });
+
+
+      })
+       
+       
+       
+ }
+
 
   return (
     <div>
@@ -37,14 +75,14 @@ export default function ProductSection() {
          <Table.Cell className='text-center' >{product.productquantity}</Table.Cell>
          <Table.Cell className='text-center'>{product.saleCount}</Table.Cell>
          <Table.Cell>
-           <a href="#" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-             update
-           </a>
+           <Link href="/update" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+           <FaUserEdit className='w-[34px] h-[32px] text-cyan-600'/>
+           </Link>
          </Table.Cell>
          <Table.Cell>
-           <a href="#" className="font-medium text-red-600 hover:underline dark:text-cyan-500">
-             delete
-           </a>
+           <p className="font-medium text-red-600 hover:underline dark:text-cyan-500">
+           <MdOutlineDelete className='w-[34px] h-[32px]' onClick={()=>deleteItem(product._id)}/>
+           </p>
          </Table.Cell>
        </Table.Row>)
        }
