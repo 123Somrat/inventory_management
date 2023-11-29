@@ -11,11 +11,13 @@ export default function ProductSection() {
     const axiosbaseUrl = useAxiosSecure()
     const {user} = useContext(AuthContext);
     const [product,setProduct] = useState([])
-    // getting product data from axios
+    // getting product data from db 
      axiosbaseUrl.get(`/products?email=${user?.email}`)
      .then(res=>setProduct(res.data))
 
+     // delete product
  const deleteItem = (id) =>{
+  // show a alert user want to delete or not
     Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -24,6 +26,7 @@ export default function ProductSection() {
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, delete it!"
+        // after user confirmation we request backend to delete the product
       }).then(async(result) => {
         if (result.isConfirmed) {
           const res= await axiosbaseUrl.delete(`/products/${id}`)
@@ -35,10 +38,11 @@ export default function ProductSection() {
                     });
             }
         }
+        // if something wrong then we show a alert also
       }).catch(err=>{
         Swal.fire({
             title: "error!",
-            text: "Opps some thing wronng",
+            text: "Opps some thing wrong",
              icon: "error"
             });
 
@@ -75,7 +79,7 @@ export default function ProductSection() {
          <Table.Cell className='text-center' >{product.productquantity}</Table.Cell>
          <Table.Cell className='text-center'>{product.saleCount}</Table.Cell>
          <Table.Cell>
-           <Link href="/update" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+           <Link to={"update"} className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
            <FaUserEdit className='w-[34px] h-[32px] text-cyan-600'/>
            </Link>
          </Table.Cell>

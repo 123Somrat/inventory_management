@@ -153,7 +153,7 @@ export default function AddProduct() {
                   type="number"
                   placeholder="20%"
                   className="w-full rounded-md focus:border-cyan-800 dark:border-gray-700 dark:text-gray-900"
-                  {...register("profitmargin",{required:true,valueAsNumber: true})}
+                  {...register("profitmargin",{required:true,valueAsNumber: true,min:1})}
                 />
                 {errors.profitmargin && <span className="text-red-700 block mt-2 ml-2">Profit margin is required</span>}
               </div>
@@ -167,7 +167,7 @@ export default function AddProduct() {
                   name="productquantity"
                   placeholder="Product Quantity"
                   className="w-full rounded-md focus:border-cyan-800 dark:border-gray-700 dark:text-gray-900"
-                  {...register("productquantity",{required:true,valueAsNumber: true})}
+                  {...register("productquantity",{required:true,valueAsNumber: true,min:1})}
                 />
                 {errors.productquantity && <span className="text-red-700 block mt-2 ml-2">Product quantity required</span>}
               </div>
@@ -184,10 +184,11 @@ export default function AddProduct() {
                   className="w-full rounded-md focus:border-cyan-800 dark:border-gray-700 dark:text-gray-900"
                   {...register("productioncost", {
                     required: true,
-                    valueAsNumber: true
+                    valueAsNumber: true,
+                    min:1
                   })}
                 ></input>
-                {errors.bio && (
+                {errors.productioncost && (
                   <span className="text-red-700 block mt-2 ml-2">
                     Production Cost Is Required
                   </span>
@@ -203,7 +204,7 @@ export default function AddProduct() {
                   type="number"
                   placeholder="Discount"
                   className="w-full rounded-md focus:border-cyan-800 dark:border-gray-700 dark:text-gray-900"
-                  {...register("discount",{required:true,valueAsNumber: true})}
+                  {...register("discount",{required:true,valueAsNumber: true,min:1})}
                 />
                 {errors.discount && <span className="text-red-700 block mt-2 ml-2">Discount is required</span>}
               </div>

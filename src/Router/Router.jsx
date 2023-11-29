@@ -43,7 +43,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path : "dashboard",
+    path : "/dashboard",
     element : <DashboardLayout/>,
     children : [
      {
@@ -53,6 +53,10 @@ const router = createBrowserRouter([
      {
       path : "productsection",
       element:<ProductSection/>
+     },
+     {
+      path:"productsection/update",
+      element:<h1>product update page</h1>
      }
 
 
