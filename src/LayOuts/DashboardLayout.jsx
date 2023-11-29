@@ -27,10 +27,11 @@ export default function DashboardLayout() {
         </div>
         </div> }
 
-        <main>
+        <main className="w-full">
           <Outlet />
         </main>
       </div>
     </div>
   );
 }
+ 
