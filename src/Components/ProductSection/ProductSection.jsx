@@ -4,13 +4,15 @@ import { AuthContext } from '../../Providers/Providers'
 import { MdOutlineDelete } from "react-icons/md";
 import { FaUserEdit } from "react-icons/fa";
 import { Table } from "flowbite-react";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
-
+import { IoBagCheckOutline } from "react-icons/io5";
 export default function ProductSection() {
     const axiosbaseUrl = useAxiosSecure()
     const {user} = useContext(AuthContext);
     const [product,setProduct] = useState([])
+    const location =useLocation();
+    console.log(location)
     // getting product data from db 
      axiosbaseUrl.get(`/products?email=${user?.email}`)
      .then(res=>setProduct(res.data))
@@ -56,14 +58,51 @@ export default function ProductSection() {
 
   return (
     <div>
-          <Table className='drop-shadow-none'>
+      {
+        location.pathname==="/dashboard/productsection" ?  <Table className='drop-shadow-none'>
+        <Table.Head>
+          <Table.HeadCell>Product Image</Table.HeadCell>
+          <Table.HeadCell>Product Name</Table.HeadCell>
+          <Table.HeadCell>Product Quantity</Table.HeadCell>
+          <Table.HeadCell>Sales Count</Table.HeadCell>
+          <Table.HeadCell>Update</Table.HeadCell>
+          <Table.HeadCell>Delete</Table.HeadCell>
+          <Table.HeadCell>
+            <span className="sr-only">Edit</span>
+          </Table.HeadCell>
+        </Table.Head>
+        <Table.Body className="divide-y border-none">
+     {
+      
+       product?.map((product,index)=><Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800 ">
+       <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+       {<img src={product.imageUrl} className='h-12 w-12 rounded'/>}
+       </Table.Cell>
+       <Table.Cell className='text-center'>{product.productname}</Table.Cell>
+       <Table.Cell className='text-center' >{product.productquantity}</Table.Cell>
+       <Table.Cell className='text-center'>{product.saleCount}</Table.Cell>
+       <Table.Cell>
+         <Link to={`update/${product._id}`} className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+         <FaUserEdit className='w-[34px] h-[32px] text-cyan-600'/>
+         </Link>
+       </Table.Cell>
+       <Table.Cell>
+         <p className="font-medium text-red-600 hover:underline dark:text-cyan-500">
+         <MdOutlineDelete className='w-[34px] h-[32px]' onClick={()=>deleteItem(product._id)}/>
+         </p>
+       </Table.Cell>
+     </Table.Row>)
+     }
+     </Table.Body>
+    </Table> :     <Table className='drop-shadow-none'>
           <Table.Head>
             <Table.HeadCell>Product Image</Table.HeadCell>
+            <Table.HeadCell>Product id</Table.HeadCell>
             <Table.HeadCell>Product Name</Table.HeadCell>
-            <Table.HeadCell>Product Quantity</Table.HeadCell>
-            <Table.HeadCell>Sales Count</Table.HeadCell>
-            <Table.HeadCell>Update</Table.HeadCell>
-            <Table.HeadCell>Delete</Table.HeadCell>
+            <Table.HeadCell>Quantity</Table.HeadCell>
+            <Table.HeadCell>Discount</Table.HeadCell>
+            <Table.HeadCell>Selling Price</Table.HeadCell>
+            <Table.HeadCell>Checkout</Table.HeadCell>
             <Table.HeadCell>
               <span className="sr-only">Edit</span>
             </Table.HeadCell>
@@ -75,23 +114,23 @@ export default function ProductSection() {
          <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
          {<img src={product.imageUrl} className='h-12 w-12 rounded'/>}
          </Table.Cell>
+         <Table.Cell className='text-center'>{product._id}</Table.Cell>
          <Table.Cell className='text-center'>{product.productname}</Table.Cell>
          <Table.Cell className='text-center' >{product.productquantity}</Table.Cell>
-         <Table.Cell className='text-center'>{product.saleCount}</Table.Cell>
+         <Table.Cell className='text-center'>{product.discount
+}</Table.Cell>
+<Table.Cell className='text-center'>{product.sellingPrice}</Table.Cell>
          <Table.Cell>
-           <Link to={`update/${product._id}`} className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-           <FaUserEdit className='w-[34px] h-[32px] text-cyan-600'/>
-           </Link>
-         </Table.Cell>
-         <Table.Cell>
-           <p className="font-medium text-red-600 hover:underline dark:text-cyan-500">
-           <MdOutlineDelete className='w-[34px] h-[32px]' onClick={()=>deleteItem(product._id)}/>
+           <p className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+           <IoBagCheckOutline className='w-[34px] h-[32px]' onClick={()=>deleteItem(product._id)}/>
            </p>
          </Table.Cell>
        </Table.Row>)
        }
        </Table.Body>
       </Table>
+      }
+          
     </div>
   )
 }

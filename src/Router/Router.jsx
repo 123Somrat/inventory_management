@@ -13,6 +13,7 @@ import DashboardLayout from "../LayOuts/DashboardLayout";
 import AddProduct from "../Components/AddProduct/AddProduct";
 import ProductSection from "../Components/ProductSection/ProductSection";
 import UpdateProduct from "../Components/UpdateProduct/UpdateProduct";
+import SalesCollection from "../Components/SalesCollection/SalesCollection";
 
 
 const router = createBrowserRouter([
@@ -44,7 +45,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path : "/dashboard",
+    path : "dashboard",
     element : <DashboardLayout/>,
     children : [
      {
@@ -60,6 +61,11 @@ const router = createBrowserRouter([
       element:<UpdateProduct />,
       loader : ({params}) =>fetch(`http://localhost:3000/products/${params.id}`)
 
+     },
+     {
+       path:"salescollection",
+       element:<SalesCollection/>
+       
      }
 
 
