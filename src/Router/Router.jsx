@@ -15,6 +15,7 @@ import ProductSection from "../Components/ProductSection/ProductSection";
 import UpdateProduct from "../Components/UpdateProduct/UpdateProduct";
 import SalesCollection from "../Components/SalesCollection/SalesCollection";
 import Cart from "../Components/Cart/Cart";
+import Subscription from "../Components/Subscription/Subscription";
 
 
 const router = createBrowserRouter([
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
      {
       path:"cart",
       element :<Cart/>
+     },
+     {
+      path:"subscription",
+      element:<Subscription />
      }
 
 

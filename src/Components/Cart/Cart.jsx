@@ -61,7 +61,7 @@ export default function Cart() {
 
 
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-2 min-w-full">
            {
               cart?.length==0 ? <><Lottie animationData={emptyCart} loop={true} className="w-[350px] h-[400px] mx-auto"/></>
               : <div className="w-full">
