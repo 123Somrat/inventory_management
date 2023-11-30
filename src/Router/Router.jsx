@@ -14,6 +14,7 @@ import AddProduct from "../Components/AddProduct/AddProduct";
 import ProductSection from "../Components/ProductSection/ProductSection";
 import UpdateProduct from "../Components/UpdateProduct/UpdateProduct";
 import SalesCollection from "../Components/SalesCollection/SalesCollection";
+import Cart from "../Components/Cart/Cart";
 
 
 const router = createBrowserRouter([
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
        path:"salescollection",
        element:<SalesCollection/>
        
+     },
+     {
+      path:"cart",
+      element :<Cart/>
      }
 
 
