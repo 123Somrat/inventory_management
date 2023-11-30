@@ -9,9 +9,9 @@ export default function DashboardLayout() {
  const count = useProductCount()
  
   return (
-    <div className="max-w-6xl mx-auto  shadow-sm shadow-cyan-200">
+    <div className="max-w-6xl mx-auto h-full">
       <h1 className="text-center p-4">dashboard</h1>
-      <div className="flex">
+      <div className="flex h-full">
         <aside className="border-none mr-2">
           <SideNavBar />
         </aside>

@@ -6,7 +6,7 @@ export default function SideNavBar() {
   const {user} = useContext(AuthContext)
   const userName = user?.email.slice(0,6)
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-6xl mx-auto h-full">
       <div className="flex flex-col shadow-sm p-3 w-60  dark:text-black-100">
         <div className="space-y-3">
           <div className="flex items-center justify-between">

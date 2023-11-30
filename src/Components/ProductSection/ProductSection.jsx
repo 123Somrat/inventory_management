@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import useAxiosSecure from '../../Hooks/useAxiosSecure'
 import { AuthContext } from '../../Providers/Providers'
 import { MdOutlineDelete } from "react-icons/md";
@@ -15,20 +15,23 @@ export default function ProductSection() {
     const location =useLocation();
 
     // getting product data from db 
-     axiosbaseUrl.get(`/products?email=${user?.email}`)
-     .then(res=>setProduct(res.data))
+    useEffect(()=>{
+      axiosbaseUrl.get(`/products?email=${user?.email}`)
+      .then(res=>setProduct(res.data))
+    },[product])
+    
 
 
-// add ite, in cart
+ // add item in cart for checkout 
 const checkout = (id) =>{
-  const shopId = id;
+  const productId = id;
   const useremail = user?.email;
   const cartDate = {
-       shopId,
+       productId,
        useremail
   };
 
-  axiosbaseUrl.post("/productcarts",cartDate)     
+  axiosbaseUrl.post("/carts",cartDate)     
   .then(res=>{
     if(res.data. acknowledged===true){
       Swal.fire({
@@ -88,7 +91,7 @@ const checkout = (id) =>{
 
       })
        
-     // add item in cart for checkout  
+     
 
     
        
