@@ -7,15 +7,52 @@ import { Table } from "flowbite-react";
 import { Link, useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { IoBagCheckOutline } from "react-icons/io5";
+
 export default function ProductSection() {
     const axiosbaseUrl = useAxiosSecure()
     const {user} = useContext(AuthContext);
     const [product,setProduct] = useState([])
     const location =useLocation();
-    console.log(location)
+
     // getting product data from db 
      axiosbaseUrl.get(`/products?email=${user?.email}`)
      .then(res=>setProduct(res.data))
+
+
+// add ite, in cart
+const checkout = (id) =>{
+  const shopId = id;
+  const useremail = user?.email;
+  const cartDate = {
+       shopId,
+       useremail
+  };
+
+  axiosbaseUrl.post("/productcarts",cartDate)     
+  .then(res=>{
+    if(res.data. acknowledged===true){
+      Swal.fire({
+        title: "success",
+        text: "Peoduct successfully added in cart",
+         icon: "success"
+  
+       })
+    }
+  }).catch(err=>{
+    Swal.fire({
+      title: "error",
+      text: "Product already in cart",
+       icon: "error"
+
+     })
+
+
+  })
+}
+
+
+
+
 
      // delete product
  const deleteItem = (id) =>{
@@ -51,7 +88,9 @@ export default function ProductSection() {
 
       })
        
-       
+     // add item in cart for checkout  
+
+    
        
  }
 
@@ -74,7 +113,7 @@ export default function ProductSection() {
         <Table.Body className="divide-y border-none">
      {
       
-       product?.map((product,index)=><Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800 ">
+       product?.map((product,index)=><Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-80">
        <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
        {<img src={product.imageUrl} className='h-12 w-12 rounded'/>}
        </Table.Cell>
@@ -94,8 +133,8 @@ export default function ProductSection() {
      </Table.Row>)
      }
      </Table.Body>
-    </Table> :     <Table className='drop-shadow-none'>
-          <Table.Head>
+    </Table> :     <Table className='drop-shadow-none w-[250px]'>
+          <Table.Head className='px-[12px]'>
             <Table.HeadCell>Product Image</Table.HeadCell>
             <Table.HeadCell>Product id</Table.HeadCell>
             <Table.HeadCell>Product Name</Table.HeadCell>
@@ -122,7 +161,7 @@ export default function ProductSection() {
 <Table.Cell className='text-center'>{product.sellingPrice}</Table.Cell>
          <Table.Cell>
            <p className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-           <IoBagCheckOutline className='w-[34px] h-[32px]' onClick={()=>deleteItem(product._id)}/>
+           <IoBagCheckOutline className='w-[34px] h-[32px]' onClick={()=>checkout(product._id)}/>
            </p>
          </Table.Cell>
        </Table.Row>)

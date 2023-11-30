@@ -10,7 +10,7 @@ export default function LayOuts() {
     <div className='max-w-6xl mx-auto m-4'>
         <div> 
             <NavBar/>
-            <div>
+            <div >
                <Outlet/> 
             </div>
         </div>  
