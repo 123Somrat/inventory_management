@@ -6,8 +6,8 @@ export default function  useProductCount() {
     const axiosbase = useAxiosSecure()
     const [count,setCount] = useState(0)
     const {user} = useContext(AuthContext)
-    axiosbase.get(`/productcount?email=${user?.email}`)
-    .then(res=>setCount(res.data))
+   // axiosbase.get(`/productcount?email=${user?.email}`)
+   // .then(res=>setCount(res.data))
 
-  return count
+  //return count
 }

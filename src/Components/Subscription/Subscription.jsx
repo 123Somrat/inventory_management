@@ -1,6 +1,13 @@
 import { Card } from 'flowbite-react';
-
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
 export default function Subscription() {
+ // const stripe = useStripe();
+ //const elements = useElements();
+
+ //const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PRIVATE_KEY);
+
      const subscriptionPlane = [
            {
              cost : 10,
@@ -17,10 +24,22 @@ export default function Subscription() {
 
      ]
 
+     const ChoosePlan  = async (cost) => {
+          
+   
+
+
+     }
+
+
+
+
+
   return (
     <div className='flex flex-wrap gap-4 ml-4'>
         {
-           subscriptionPlane?.map(item=>  <Card className='w-64'>
+           subscriptionPlane?.map((item,id)=>  <Card className='w-64' key={id}>
+          
            <h5 className="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">Standard plan</h5>
            <div className="flex items-baseline text-gray-900 dark:text-white">
              <span className="text-3xl font-semibold">$</span>
@@ -78,16 +97,23 @@ export default function Subscription() {
          
            
            </ul>
+           <div>
+          
            <button
              type="button"
              className="inline-flex w-full justify-center rounded-lg bg-cyan-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-cyan-700 focus:outline-none focus:ring-4 focus:ring-cyan-200 dark:focus:ring-cyan-900"
-           >
-             Choose plan
+             onClick={()=>ChoosePlan(item.cost)}>
+              Choose Plan
            </button>
+           
+           </div>
+        
+             
+        
          </Card>)   
         }
    
- 
+
 
 
 

@@ -16,6 +16,7 @@ import UpdateProduct from "../Components/UpdateProduct/UpdateProduct";
 import SalesCollection from "../Components/SalesCollection/SalesCollection";
 import Cart from "../Components/Cart/Cart";
 import Subscription from "../Components/Subscription/Subscription";
+import SalesCount from "../Components/SalesCount/SalesCount";
 
 
 const router = createBrowserRouter([
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
      {
       path:"subscription",
       element:<Subscription />
+     },
+     {
+      path :"salescount",
+      element : <SalesCount/>
      }
 
 

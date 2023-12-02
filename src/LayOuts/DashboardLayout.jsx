@@ -6,7 +6,7 @@ import useProductCount from "../Hooks/useProductCount";
 
 export default function DashboardLayout() {
   const location = useLocation();
- const count = useProductCount()
+ //const count = useProductCount()
  
   return (
     <div className="max-w-6xl mx-auto h-full">
