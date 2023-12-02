@@ -77,7 +77,7 @@ const checkout = (id) =>{
                     title: "Deleted!",
                     text: "Your file has been deleted.",
                      icon: "success"
-                    });
+                    });o
             }
         }
         // if something wrong then we show a alert also
