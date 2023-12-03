@@ -17,6 +17,7 @@ import SalesCollection from "../Components/SalesCollection/SalesCollection";
 import Cart from "../Components/Cart/Cart";
 import Subscription from "../Components/Subscription/Subscription";
 import SalesCount from "../Components/SalesCount/SalesCount";
+import SalesHistory from "../Components/SalesHistory/SalesHistory";
 
 
 const router = createBrowserRouter([
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
      {
       path :"salescount",
       element : <SalesCount/>
+     },
+     {
+      path : "saleshistory",
+      element:<SalesHistory/>
      }
 
 
