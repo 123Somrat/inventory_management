@@ -2,14 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure"
 import { AuthContext } from "../../Providers/Providers";
 import { Button, Table } from "flowbite-react";
-import { Link } from "react-router-dom";
+
 
 export default function Users() {
     const axiosbaseUrl = useAxiosSecure();
     const {user} = useContext(AuthContext);
     const [users,setUsers] = useState([])
    useEffect(()=>{
-       axiosbaseUrl.get("/allusers")
+       axiosbaseUrl.get(`/allusers?useremail=${user?.email}`)
        .then(res=>setUsers(res.data))
 
 
@@ -30,7 +30,7 @@ export default function Users() {
          </Table.Head>
          <Table.Body className="divide-y border-none">
            {
-            users.map((user,id)=><Table.Row key={id} className="bg-white dark:border-gray-700 dark:bg-gray-80">
+            users?.map((user,id)=><Table.Row key={id} className="bg-white dark:border-gray-700 dark:bg-gray-80">
             <Table.Cell>{user?.userName
 }</Table.Cell>
             <Table.Cell  >{user?.email}</Table.Cell>
