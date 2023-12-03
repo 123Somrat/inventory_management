@@ -20,7 +20,7 @@ export default function DashboardLayout() {
         {location.pathname === "/dashboard" 
         &&
         <div className="w-full flex justify-between border-t-2 border-b-2 h-12 bg-red-400" >
-        <h1 className=" p-2">you have {count?.length} product</h1> 
+        <h1 className=" p-2">you have {0} product</h1> 
         <div>
 
          <Link  to={"addproduct"} > <h1 className="bg-cyan-700  text-white p-[10px]">Add Product</h1></Link>

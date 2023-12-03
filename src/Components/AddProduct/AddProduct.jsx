@@ -65,7 +65,7 @@ export default function AddProduct() {
           confirmButtonText: "Yes"
         }).then((result) => {
           if (result.isConfirmed) {
-            navigate("/subscription")  
+            navigate("/dashboard/subscription")  
           }
         });
 

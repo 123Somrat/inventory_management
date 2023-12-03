@@ -27,7 +27,7 @@ export default function Login() {
           icon: "success"
         });
         // checking useing has store or not
-       Array.isArray(hasStore) ?navigate("/createshop") : navigate("/dashboard")
+       Array.isArray(hasStore) ? navigate("/createshop") : navigate("/dashboard")
       }).catch(err=>{
         Swal.fire({
           title: "error!",

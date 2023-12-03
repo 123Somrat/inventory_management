@@ -58,7 +58,7 @@ const logOut = () =>{
        });
        
        setUser(null)
-    
+   
       
    })
    .catch(err=>{
