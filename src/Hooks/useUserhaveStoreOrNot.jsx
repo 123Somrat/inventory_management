@@ -11,7 +11,7 @@ export default function useUserhaveStoreOrNot() {
 
    useEffect(()=>{
     axiosbaseUrl
-    .get(`/users?email=${user?.email}`)
+    .get(`/shops?email=${user?.email}`)
     .then((res)=>setHasStore(res.data))  
  
    },[user])

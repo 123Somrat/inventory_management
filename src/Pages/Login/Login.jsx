@@ -1,42 +1,63 @@
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/Providers";
-import { useContext } from "react";
+import { useContext ,useState} from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useUserhaveStoreOrNot from "../../Hooks/useUserhaveStoreOrNot";
+import useAxios from "../../Hooks/useAxios";
+
+
 export default function Login() {
  const navigate = useNavigate()
-   const hasStore = useUserhaveStoreOrNot();
+ const axiosPublic = useAxios();
+ const hasStore = useUserhaveStoreOrNot();
+ const [userStatus,setUserStatus] = useState({})
+
    
 
-  // useing login user method from authcontext
+     // useing login user method from authcontext
   const {loginUser} = useContext(AuthContext)
 
  // useing useForm hook from react hook form
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
-  const onSubmit = data => {
+  const onSubmit = async data => {
        const {email,password}= data
-       loginUser(email,password)
 
-       // todo : have to navigate dasjboard
-       .then(res=>{
-        Swal.fire({
-          title: "Success!",
-          text: "User login successfully!",
-          icon: "success"
-        });
-        // checking useing has store or not
-       Array.isArray(hasStore) ? navigate("/createshop") : navigate("/dashboard")
-      }).catch(err=>{
-        Swal.fire({
-          title: "error!",
-          text: `${err.message}`,
-          icon: "error"
-        });
+       // checking user status
+     const user = await  axiosPublic.get(`/users?email=${email}`)
+
+     // if users status in pending then we will show a info messege
+    if(user.data.status==="pending"){
+      Swal.fire({
+        title: "info!",
+        text: "Your request still in pending wait a bit for accept your status!",
+        icon: "info"
+      });
+    }else{
+
+      loginUser(email,password)
+      // todo : have to navigate dasjboard
+      .then(res=>{
+       Swal.fire({
+         title: "Success!",
+         text: "User login successfully!",
+         icon: "success"
+       });
+       // checking useing has store or not
+      Array.isArray(hasStore) ? navigate("/createshop") : navigate("/dashboard")
+     }).catch(err=>{
+       Swal.fire({
+         title: "error!",
+         text: `${err.message}`,
+         icon: "error"
+       });
 
 
-      })
+     })
+    }
+
+
 
 
   };

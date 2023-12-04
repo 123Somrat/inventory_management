@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 export default function AdminRoute({children}) {
   const {user,logOut}= useContext(AuthContext);
  const navigate = useNavigate()
-  if(user && user?.email==="mdjafaruddinsomrat@gmail.com"){
+  if(user && user?.email==="admin@gmail.com"){
      return children
   }else{
         logOut() 
