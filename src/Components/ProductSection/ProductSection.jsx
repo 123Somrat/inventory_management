@@ -116,7 +116,7 @@ const checkout = (id) =>{
         <Table.Body className="divide-y border-none">
      {
       
-       product?.map((product,index)=><Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-80">
+  product?.map((product,index)=><Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-80">
        <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
        {<img src={product.imageUrl} className='h-12 w-12 rounded'/>}
        </Table.Cell>
