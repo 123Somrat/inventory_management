@@ -174,7 +174,7 @@ export default function SideNavBar() {
              { user?.email ==="somrat@gmail.com" && <li className="rounded-sm">
                 <Link
                   rel="noopener noreferrer"
-                  to={"users"}
+                  to={"allusers"}
                   className="flex items-center p-2 space-x-3 rounded-md"
                 >
                   <svg
@@ -189,10 +189,11 @@ export default function SideNavBar() {
                 </Link>
               </li>
                }
-             {user?.email==="somrat@gmail" && <li className="rounded-sm">
+             { user?.email==="somrat@gmail.com" && <li className="rounded-sm">
+           
                 <Link
                   rel="noopener noreferrer"
-                  to={"shops"}
+                  to={"allshops"}
                   className="flex items-center p-2 space-x-3 rounded-md"
                 >
                   <svg

@@ -20,6 +20,7 @@ import SalesCount from "../Components/SalesCount/SalesCount";
 import SalesHistory from "../Components/SalesHistory/SalesHistory";
 import Users from "../Components/Users/Users";
 import Shops from "../Components/Shops/Shops";
+import AdminRoute from "../AdminRoute/AdminRoute";
 
 
 const router = createBrowserRouter([
@@ -90,12 +91,12 @@ const router = createBrowserRouter([
       element:<SalesHistory/>
      },
      {
-       path : "users",
-       element:<Users/>
+       path : "allusers",
+       element:<AdminRoute><Users/></AdminRoute>
      },
      {
-      path : "shops",
-      element : <Shops/>
+      path : "allshops",
+      element :<AdminRoute><Shops/></AdminRoute>
      }
      
 
