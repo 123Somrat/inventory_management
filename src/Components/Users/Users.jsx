@@ -4,7 +4,10 @@ import { AuthContext } from "../../Providers/Providers";
 import { Button, Table } from "flowbite-react";
 
 
+
 export default function Users() {
+
+  
     const axiosbaseUrl = useAxiosSecure();
     const {user} = useContext(AuthContext);
     const [users,setUsers] = useState([])
@@ -14,6 +17,23 @@ export default function Users() {
 
 
    },[])
+
+
+
+
+
+
+ const sendPromotionalEmail  = (email) =>{
+  const userEmail = {email}
+
+
+  axiosbaseUrl.post("/sendemail",userEmail)
+     
+
+ }
+
+
+
 
 
   return (
@@ -40,7 +60,7 @@ export default function Users() {
             </Table.Cell>
             <Table.Cell>
               <p className="font-medium text-red-600 hover:underline dark:text-cyan-500">
-               <Button>Send Email</Button>
+               <Button onClick={()=>sendPromotionalEmail(user?.email)}>Send Email</Button>
               </p>
             </Table.Cell>
           </Table.Row>)
