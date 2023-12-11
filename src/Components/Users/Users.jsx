@@ -11,11 +11,10 @@ export default function Users() {
     const axiosbaseUrl = useAxiosSecure();
     const {user} = useContext(AuthContext);
     const [users,setUsers] = useState([])
+
    useEffect(()=>{
        axiosbaseUrl.get(`/allusers?useremail=${user?.email}`)
        .then(res=>setUsers(res.data))
-
-
    },[])
 
 
@@ -25,9 +24,9 @@ export default function Users() {
 
  const sendPromotionalEmail  = (email) =>{
   const userEmail = {email}
-
-
-  axiosbaseUrl.post("/sendemail",userEmail)
+  const adminEmail = user?.email;
+    console.log(userEmail,adminEmail) 
+ axiosbaseUrl.post(`/sendemail?adminEmail=${adminEmail}`,userEmail)
      
 
  }
@@ -46,6 +45,7 @@ export default function Users() {
            <Table.HeadCell>User Email</Table.HeadCell>
            <Table.HeadCell>Created At</Table.HeadCell>
            <Table.HeadCell>Role</Table.HeadCell>
+           <Table.HeadCell>User Status</Table.HeadCell>
            <Table.HeadCell>Send Promotional Email</Table.HeadCell>
          </Table.Head>
          <Table.Body className="divide-y border-none">
@@ -58,6 +58,7 @@ export default function Users() {
             <Table.Cell>
             <Table.Cell>{user?.role ? user.role :"null"}</Table.Cell>
             </Table.Cell>
+            <Table.Cell>{user?.status ? user.status :"null"}</Table.Cell>
             <Table.Cell>
               <p className="font-medium text-red-600 hover:underline dark:text-cyan-500">
                <Button onClick={()=>sendPromotionalEmail(user?.email)}>Send Email</Button>

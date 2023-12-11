@@ -171,7 +171,7 @@ export default function SideNavBar() {
                   <span>Sales Count</span>
                 </Link>
               </li>
-             { user?.email ==="admin@gmail.com" && <li className="rounded-sm">
+             { user?.email ==="mdjafaruddin738@gmail" && <li className="rounded-sm">
                 <Link
                   rel="noopener noreferrer"
                   to={"allusers"}
@@ -189,7 +189,7 @@ export default function SideNavBar() {
                 </Link>
               </li>
                }
-             { user?.email==="admin@gmail.com" && <li className="rounded-sm">
+             { user?.email==="mdjafaruddin738@gmail.com" && <li className="rounded-sm">
            
                 <Link
                   rel="noopener noreferrer"
