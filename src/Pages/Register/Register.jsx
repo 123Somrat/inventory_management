@@ -36,7 +36,9 @@ const navigate = useNavigate()
          // save user data on database
          axiosPublic.post("/users",user)
          // navigate user to createshop route after register
-         .then(data=>navigate("/createshop" ))
+         .then(data=>{
+          navigate("/auth/login" )
+         })
 
        })
        .catch(err=>Swal.fire({
