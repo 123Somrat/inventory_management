@@ -64,6 +64,10 @@ const navigate = useNavigate()
           <Link  to="/watchdemo" target="_blank" className="hover:text-cyan-800" >Watch Demo</Link>
         </Navbar.Collapse>
       </Navbar>
+      <>
+    
+    </>
     </div>
+   
   );
 }
