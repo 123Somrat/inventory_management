@@ -8,13 +8,13 @@ export default function Users() {
   const axiosbaseUrl = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const [users, setUsers] = useState([]);
-  const [emialSendingStatus, setemailSendingStatus] = useState({});
-
+  const [status, setStatus] = useState(false);
+  
   useEffect(() => {
     axiosbaseUrl
       .get(`/allusers?useremail=${user?.email}`)
       .then((res) => setUsers(res.data));
-  }, []);
+  }, [status]);
 
 
   // send promotional email
@@ -45,13 +45,16 @@ export default function Users() {
   // create Change User status component
 
   const changeUserStatus = async (email)=>{
-        const userStatusChnaged = await axiosbaseUrl.patch(`/changeuserstatus?email=${email}`)
-        if(userStatusChnaged.modifiedCount>0){
+        const userStatusChanged = await axiosbaseUrl.patch(`/changeuserstatus?email=${email}`);
+        if(userStatusChanged.data.modifiedCount>0){
+         
           Swal.fire({
             title: "Success",
             text: "User Status Changed",
             icon: "success",
           }); 
+
+          setStatus(true)          
         }else{
           Swal.fire({
             title: "Error",

@@ -9,7 +9,6 @@ export default function AdminRoute({children}) {
      return children
   }else{
         logOut() 
-        
         return navigate("/auth/login")
   }
 
