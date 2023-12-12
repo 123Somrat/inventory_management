@@ -6,12 +6,10 @@ export default function SideNavBar() {
   const {user,logOut} = useContext(AuthContext)
   const userName = user?.email.slice(0,6);
   const navigate =useNavigate()
-
+  console.log(user)
  const signOut = () =>{
      logOut()
-     navigate("/auth/login")
-     
-   
+     navigate("/auth/login") 
  }
 
 
@@ -171,7 +169,7 @@ export default function SideNavBar() {
                   <span>Sales Count</span>
                 </Link>
               </li>
-             { user?.email ==="mdjafaruddin738@gmail" && <li className="rounded-sm">
+             { user?.email ==="mdjafaruddin738@gmail.com" && <li className="rounded-sm">
                 <Link
                   rel="noopener noreferrer"
                   to={"allusers"}
