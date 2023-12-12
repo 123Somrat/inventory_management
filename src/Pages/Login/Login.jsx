@@ -31,7 +31,7 @@ export default function Login() {
     if(user.data.status==="pending"){
       Swal.fire({
         title: "info!",
-        text: "Your request still in pending wait a bit for accept your status!",
+        text: "Your request still in pending wait a bit for accept your request!",
         icon: "info"
       });
     }else{
