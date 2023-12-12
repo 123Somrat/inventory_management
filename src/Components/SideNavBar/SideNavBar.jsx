@@ -6,7 +6,7 @@ export default function SideNavBar() {
   const {user,logOut} = useContext(AuthContext)
   const userName = user?.email.slice(0,6);
   const navigate =useNavigate()
-  console.log(user)
+
  const signOut = () =>{
      logOut()
      navigate("/auth/login") 

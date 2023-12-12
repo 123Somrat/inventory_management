@@ -16,6 +16,8 @@ export default function Users() {
       .then((res) => setUsers(res.data));
   }, []);
 
+
+  // send promotional email
   const sendPromotionalEmail = async (email) => {
     const userEmail = { email };
     const adminEmail = user?.email;
@@ -39,6 +41,29 @@ export default function Users() {
       });
     }
   };
+ 
+  // create Change User status component
+
+  const changeUserStatus = async (email)=>{
+        const userStatusChnaged = await axiosbaseUrl.patch(`/changeuserstatus?email=${email}`)
+        if(userStatusChnaged.modifiedCount>0){
+          Swal.fire({
+            title: "Success",
+            text: "User Status Changed",
+            icon: "success",
+          }); 
+        }else{
+          Swal.fire({
+            title: "Error",
+            text: "Something is wrong",
+            icon: "Error",
+          });
+        }
+
+  }
+
+
+
 
   return (
     <div>
@@ -60,14 +85,19 @@ export default function Users() {
             >
               <Table.Cell>{user?.userName}</Table.Cell>
               <Table.Cell>{user?.email}</Table.Cell>
-              <Table.Cell>{user?.createdAt}</Table.Cell>
+              <Table.Cell className="whitespace-normal">{user?.createdAt}</Table.Cell>
               <Table.Cell>
                 <Table.Cell>{user?.role ? user.role : "null"}</Table.Cell>
               </Table.Cell>
-              <Table.Cell>{user?.status ? user.status : "null"}</Table.Cell>
+              <Table.Cell>{user?.status==="pending" ?<>
+              <p className="text-red-500 text-center m-1">{user?.status}</p>
+              <Button className="whitespace-nowrap" onClick={()=>changeUserStatus(user?.email)}>
+                    Accept request
+                  </Button>
+              </> : user?.status}</Table.Cell>
               <Table.Cell>
                 <p className="font-medium text-red-600 hover:underline dark:text-cyan-500">
-                  <Button onClick={() => sendPromotionalEmail(user?.email)}>
+                  <Button onClick={() => sendPromotionalEmail(user?.email)} className="whitespace-nowrap">
                     Send Email
                   </Button>
                 </p>
