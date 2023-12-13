@@ -9,71 +9,63 @@ export default function Users() {
   const { user } = useContext(AuthContext);
   const [users, setUsers] = useState([]);
   const [status, setStatus] = useState(false);
-  
+
   useEffect(() => {
     axiosbaseUrl
       .get(`/allusers?useremail=${user?.email}`)
       .then((res) => setUsers(res.data));
   }, [status]);
 
-
   // send promotional email
   const sendPromotionalEmail = async (email) => {
     const userEmail = { email };
     const adminEmail = user?.email;
 
-    try{
+    try {
       const emailsendConformation = await axiosbaseUrl.post(
         `/sendemail?adminEmail=${adminEmail}`,
         userEmail
       );
-      
+
       if (emailsendConformation.data.status === 200) {
         Swal.fire({
           title: "Success",
           text: "Email send successfully",
           icon: "success",
         });
-      // setemailSendingStatus(emailsendConformation.data);
-      } 
-    }catch(err){
+        // setemailSendingStatus(emailsendConformation.data);
+      }
+    } catch (err) {
       Swal.fire({
         title: "Error",
-        text:`${err.message}`,
+        text: `${err.message}`,
         icon: "error",
       });
-
     }
-    
-    
-    
   };
- 
+
   // create Change User status component
 
-  const changeUserStatus = async (email)=>{
-        const userStatusChanged = await axiosbaseUrl.patch(`/changeuserstatus?email=${email}`);
-        if(userStatusChanged.data.modifiedCount>0){
-         
-          Swal.fire({
-            title: "Success",
-            text: "User Status Changed",
-            icon: "success",
-          }); 
+  const changeUserStatus = async (email) => {
+    const userStatusChanged = await axiosbaseUrl.patch(
+      `/changeuserstatus?email=${email}`
+    );
+    if (userStatusChanged.data.modifiedCount > 0) {
+      Swal.fire({
+        title: "Success",
+        text: "User Status Changed",
+        icon: "success",
+      });
 
-          setStatus(true)          
-        }else{
-          Swal.fire({
-            title: "Error",
-            text: "Something is wrong",
-            icon: "Error",
-          });
-        }
-
-  }
-
-
-
+      setStatus(true);
+    } else {
+      Swal.fire({
+        title: "Error",
+        text: "Something is wrong",
+        icon: "Error",
+      });
+    }
+  };
 
   return (
     <div>
@@ -95,19 +87,35 @@ export default function Users() {
             >
               <Table.Cell>{user?.userName}</Table.Cell>
               <Table.Cell>{user?.email}</Table.Cell>
-              <Table.Cell className="whitespace-normal">{user?.createdAt}</Table.Cell>
+              <Table.Cell className="whitespace-normal">
+                {user?.createdAt}
+              </Table.Cell>
               <Table.Cell>
                 <Table.Cell>{user?.role ? user.role : "null"}</Table.Cell>
               </Table.Cell>
-              <Table.Cell>{user?.status==="pending" ?<>
-              <p className="text-red-500 text-center m-1">{user?.status}</p>
-              <Button className="whitespace-nowrap" onClick={()=>changeUserStatus(user?.email)}>
-                    Accept request
-                  </Button>
-              </> : user?.status}</Table.Cell>
+              <Table.Cell>
+                {user?.status === "pending" ? (
+                  <>
+                    <p className="text-red-500 text-center m-1">
+                      {user?.status}
+                    </p>
+                    <Button
+                      className="whitespace-nowrap"
+                      onClick={() => changeUserStatus(user?.email)}
+                    >
+                      Accept request
+                    </Button>
+                  </>
+                ) : (
+                  user?.status
+                )}
+              </Table.Cell>
               <Table.Cell>
                 <p className="font-medium text-red-600 hover:underline dark:text-cyan-500">
-                  <Button onClick={() => sendPromotionalEmail(user?.email)} className="whitespace-nowrap">
+                  <Button
+                    onClick={() => sendPromotionalEmail(user?.email)}
+                    className="whitespace-nowrap"
+                  >
                     Send Email
                   </Button>
                 </p>
