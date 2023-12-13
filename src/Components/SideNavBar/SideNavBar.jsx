@@ -15,7 +15,7 @@ export default function SideNavBar() {
 
 
   return (
-    <div className="max-w-6xl mx-auto h-full">
+    <div className="max-w-6xl mx-auto min-h-screen">
       <div className="flex flex-col shadow-sm p-3 w-60  dark:text-black-100">
         <div className="space-y-3">
           <div className="flex items-center justify-between">

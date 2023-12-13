@@ -4,12 +4,13 @@ import { createUserWithEmailAndPassword , signInWithEmailAndPassword , signOut ,
 import Swal from "sweetalert2";
 import { Navigate } from "react-router-dom";
 import useUserhaveStoreOrNot from "../Hooks/useUserhaveStoreOrNot";
+import useAxios from "../Hooks/useAxios";
 // create context
 export const AuthContext = createContext();
 
 export default function Providers({ children }) {
  const [user,setUser] = useState(null)
-
+ const axiosPublic = useAxios()
 
 // create user 
    const createUser = (user)=>{
@@ -25,13 +26,22 @@ const loginUser = (email,password) =>{
 
 // observer user status
 useEffect(()=>{
-  const unSubscribe =  onAuthStateChanged(auth, (user) => {
+  const unSubscribe =  onAuthStateChanged(auth, async(user) => {
       if (user) {
-        setUser(user)
+          const userData ={ email : user?.email}
+
+          // request for jwt token
+          const token =await axiosPublic.post("/generatejwttoken",userData);
+         
+          if(token?.data?.jwtToken){
+            // set jwt token in local storage
+               const jwtToken = localStorage.setItem("jwt_token",token?.data?.jwtToken)
+          }
+         setUser(user) 
        
       } else {
-        // User is signed out
-        // ...
+         // remove jwt token when user logout 
+           localStorage.removeItem("jwt_token")
       }
     });
 
