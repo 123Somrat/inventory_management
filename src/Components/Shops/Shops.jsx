@@ -7,10 +7,32 @@ export default function Shops() {
     const axiosbaseUrl = useAxiosSecure();
     const {user}= useContext(AuthContext);
     const [shops,setShops] = useState([])
+
+    // fetching all stores
         useEffect(()=>{
               axiosbaseUrl.get(`/allshops?useremail=${user?.email}`)
               .then(res=>setShops(res.data))
         },[])
+
+ // send notice to store owner
+   const sendNotice =async (email)=>{
+          const storeOwnerEmail = {email}
+         const sendNoticeInfo =await axiosbaseUrl.post("/sendnotice",storeOwnerEmail)
+         if (sendNoticeInfo.data.status === 200) {
+          Swal.fire({
+            title: "Success",
+            text: "Notice send successfully",
+            icon: "success",
+          });
+          
+        } else {
+          Swal.fire({
+            title: "Error",
+            text: "Something is wrong",
+            icon: "Error",
+          });
+        }
+   }
 
 
   return (
@@ -35,7 +57,8 @@ export default function Shops() {
                <Table.Cell >{shop?.productLimit}</Table.Cell>
                <Table.Cell>{shop?.description}</Table.Cell>
                <Table.Cell>
-                <Button>Send Notice</Button>
+                <Button onClick={()=>sendNotice(shop?.useremail
+)}>Send Notice</Button>
                </Table.Cell>
                
              </Table.Row>)

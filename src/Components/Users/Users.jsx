@@ -22,24 +22,31 @@ export default function Users() {
     const userEmail = { email };
     const adminEmail = user?.email;
 
-    const emailsendConformation = await axiosbaseUrl.post(
-      `/sendemail?adminEmail=${adminEmail}`,
-      userEmail
-    );
-    if (emailsendConformation.data.status === 200) {
-      Swal.fire({
-        title: "Success",
-        text: "Email send successfully",
-        icon: "success",
-      });
-      setemailSendingStatus(emailsendConformation.data);
-    } else {
+    try{
+      const emailsendConformation = await axiosbaseUrl.post(
+        `/sendemail?adminEmail=${adminEmail}`,
+        userEmail
+      );
+      
+      if (emailsendConformation.data.status === 200) {
+        Swal.fire({
+          title: "Success",
+          text: "Email send successfully",
+          icon: "success",
+        });
+      // setemailSendingStatus(emailsendConformation.data);
+      } 
+    }catch(err){
       Swal.fire({
         title: "Error",
-        text: "Something is wrong",
-        icon: "Error",
+        text:`${err.message}`,
+        icon: "error",
       });
+
     }
+    
+    
+    
   };
  
   // create Change User status component
