@@ -68,8 +68,8 @@ export default function Users() {
   };
 
   return (
-    <div>
-      <Table className="drop-shadow-none">
+    <div className="overflow-x-auto">
+      <Table className="drop-shadow-none invisible md:visible">
         <Table.Head>
           <Table.HeadCell>User Name</Table.HeadCell>
 
@@ -87,7 +87,7 @@ export default function Users() {
             >
               <Table.Cell>{user?.userName}</Table.Cell>
               <Table.Cell>{user?.email}</Table.Cell>
-              <Table.Cell className="whitespace-normal">
+              <Table.Cell className="whitespace-nowrap">
                 {user?.createdAt}
               </Table.Cell>
               <Table.Cell>

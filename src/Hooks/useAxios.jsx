@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default function useAxios() {
     const axiosPublic = axios.create({
-        baseURL: 'http://localhost:5000',
+        baseURL: "https://inventory-management-eqz0.onrender.com",
       });
   
       return axiosPublic
