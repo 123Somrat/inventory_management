@@ -3,7 +3,7 @@ import axios from "axios";
 export default function useAxiosSecure() {
 
   const axiosbaseUrl = axios.create({
-    baseURL: "https://inventory-management-eqz0.onrender.com",
+    baseURL: "http://localhost:3000",
   });
 
   
