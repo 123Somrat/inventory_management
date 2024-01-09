@@ -19,12 +19,14 @@ export default function CreateShop() {
   } = useForm();
   const onSubmit = (data) => {
     const { shopname, shoplogo, shoplocation, description } = data;
+    const shoplogopath = shoplogo[0].name
+    
     //create shop object
     const shopInfo = {
       username,
       useremail,
       shopname,
-      shoplogo,
+      shoplogopath,
       shoplocation,
       description,
     };
@@ -92,7 +94,7 @@ export default function CreateShop() {
                 <input
                   id="shoplogo"
                   name="shoplogo"
-                  type="text"
+                  type="file"
                   placeholder="https://"
                   className="w-full rounded-md focus:border-cyan-800 dark:border-gray-700 dark:text-gray-900"
                   {...register("shoplogo", { required: true })}
