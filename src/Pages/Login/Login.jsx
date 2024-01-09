@@ -1,65 +1,63 @@
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/Providers";
-import { useContext ,useState} from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-import useUserhaveStoreOrNot from "../../Hooks/useUserhaveStoreOrNot";
 import useAxios from "../../Hooks/useAxios";
 
-
 export default function Login() {
- const navigate = useNavigate()
- const axiosPublic = useAxios();
- const hasStore = useUserhaveStoreOrNot();
- const [userStatus,setUserStatus] = useState({})
+  const navigate = useNavigate();
+  const axiosPublic = useAxios();
+  const [userStatus, setUserStatus] = useState({});
 
-   
+  // useing login user method from authcontext
+  const { loginUser } = useContext(AuthContext);
 
-     // useing login user method from authcontext
-  const {loginUser} = useContext(AuthContext)
+  // useing useForm hook from react hook form
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
- // useing useForm hook from react hook form
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const onSubmit = async (data) => {
+    const { email, password } = data;
 
-  const onSubmit = async data => {
-       const {email,password}= data
-
-       // checking user status
-     const user = await  axiosPublic.get(`/users?email=${email}`)
-
-     // if users status in pending then we will show a info messege
-    if(user.data.status==="pending"){
+    // checking user status
+    const user = await axiosPublic.get(`/users?email=${email}`);
+    // Checking user have store or not
+    const hasStore = await axiosPublic.get(`/shops?email=${email}`);
+    // if users status in pending then we will show a info messege
+    if (user.data.status === "pending") {
       Swal.fire({
         title: "info!",
         text: "Your request still in pending wait a bit for accept your request!",
-        icon: "info"
+        icon: "info",
       });
-    }else{
-
-      loginUser(email,password)
-      // todo : have to navigate dasjboard
-      .then(res=>{
-       Swal.fire({
-         title: "Success!",
-         text: "User login successfully!",
-         icon: "success"
-       });
-       // checking useing has store or not
-      Array.isArray(hasStore) ? navigate("/createshop") : navigate("/dashboard")
-     }).catch(err=>{
-       Swal.fire({
-         title: "error!",
-         text: `${err.message}`,
-         icon: "error"
-       });
-
-
-     })
+    } else {
+      loginUser(email, password)
+        // todo : have to navigate dasjboard
+        .then((res) => {
+          Swal.fire({
+            title: "Success!",
+            text: "User login successfully!",
+            icon: "success",
+          });
+          console.log(hasStore);
+          // checking useing has store or not
+          hasStore.data.length===0
+            ? navigate("/createshop")
+            : navigate("/dashboard");
+        })
+        .catch((err) => {
+          Swal.fire({
+            title: "error!",
+            text: `${err.message}`,
+            icon: "error",
+          });
+        });
     }
-
-
-
-
   };
   return (
     <div className="max-w-6xl mx-auto flex justify-center items-center m-12">
@@ -76,9 +74,13 @@ export default function Login() {
               id="email"
               placeholder="Email"
               className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-cyan-700"
-              {...register("email",{required:true})}
+              {...register("email", { required: true })}
             />
-          {errors.email && <span className="text-red-700 mt-2 block ml-1">email is required</span>}
+            {errors.email && (
+              <span className="text-red-700 mt-2 block ml-1">
+                email is required
+              </span>
+            )}
           </div>
           <div className="space-y-1 text-sm">
             <label htmlFor="password" className="block dark:text-gray-400">
@@ -90,9 +92,13 @@ export default function Login() {
               id="password"
               placeholder="Password"
               className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-cyan-700"
-              {...register("password",{required:true})}
+              {...register("password", { required: true })}
             />
-             {errors.password && <span className="text-red-700 mt-2 block ml-1">password required</span>}
+            {errors.password && (
+              <span className="text-red-700 mt-2 block ml-1">
+                password required
+              </span>
+            )}
             <div className="flex justify-end text-xs dark:text-gray-400">
               <a rel="noopener noreferrer" href="#">
                 Forgot Password?
