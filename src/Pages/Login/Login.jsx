@@ -37,19 +37,23 @@ export default function Login() {
       });
     } else {
       loginUser(email, password)
-        // todo : have to navigate dasjboard
+        // todo : have to navigate dashboard
         .then((res) => {
           Swal.fire({
             title: "Success!",
             text: "User login successfully!",
             icon: "success",
           });
-          console.log(hasStore);
+
+          // if user is admin then we redirect user to dashboard
+          user.data.role === "admin" && navigate("/dashboard");
+
           // checking useing has store or not
-          hasStore.data.length===0
+          user.data.role === "user" && hasStore.data.length === 0
             ? navigate("/createshop")
             : navigate("/dashboard");
         })
+
         .catch((err) => {
           Swal.fire({
             title: "error!",
