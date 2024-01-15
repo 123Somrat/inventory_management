@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import auth from "../FirebaseConfig/FireBaseConfig";
-import { createUserWithEmailAndPassword , signInWithEmailAndPassword , signOut , onAuthStateChanged , GoogleAuthProvider } from "firebase/auth";
+import { createUserWithEmailAndPassword , signInWithEmailAndPassword , signOut , onAuthStateChanged , GoogleAuthProvider , signInWithPopup} from "firebase/auth";
 import Swal from "sweetalert2";
 import useAxios from "../Hooks/useAxios";
 // create context
@@ -21,6 +21,20 @@ const loginUser = (email,password) =>{
    // useing utils methhods from firebase
    return signInWithEmailAndPassword(auth, email, password)
 }
+
+// loginUser with goggle
+
+const loginUserWithGoggle = () =>{
+   // import GoogleAuthProvider from firebase
+   const provider = new GoogleAuthProvider();
+
+    return signInWithPopup(auth, provider)
+
+}
+
+
+
+
 
 // observer user status
 useEffect(()=>{
@@ -85,6 +99,7 @@ const logOut = () =>{
    createUser,
    loginUser,
    logOut,
+   loginUserWithGoggle,
    user
   };
 

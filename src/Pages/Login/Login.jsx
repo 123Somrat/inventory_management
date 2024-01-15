@@ -11,7 +11,7 @@ export default function Login() {
   const [userStatus, setUserStatus] = useState({});
 
   // useing login user method from authcontext
-  const { loginUser } = useContext(AuthContext);
+  const { loginUser , loginUserWithGoggle } = useContext(AuthContext);
 
   // useing useForm hook from react hook form
   const {
@@ -45,6 +45,8 @@ export default function Login() {
             icon: "success",
           });
 
+       
+
           // if user is admin then we redirect user to dashboard
           user.data.role === "admin" && navigate("/dashboard");
 
@@ -62,7 +64,33 @@ export default function Login() {
           });
         });
     }
+
+
+
+
+
+
   };
+
+      //login throw goggle
+      const LoginThrowGoggle = ()=>{
+        loginUserWithGoggle()
+        .then(res=>Swal.fire({
+          title: "Success!",
+          text: "User login successfully!",
+          icon: "success",
+        }))
+        .catch(err=>Swal.fire({
+          title: "Error!",
+          text: "SomeThing is wrong!",
+          icon: "error",
+        }))
+
+
+       }
+
+
+
   return (
     <div className="max-w-6xl mx-auto flex justify-center items-center m-12">
       <div className="w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100">
@@ -124,7 +152,7 @@ export default function Login() {
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
         </div>
         <div className="flex justify-center space-x-4">
-          <button aria-label="Log in with Google" className="p-3 rounded-sm">
+          <button onClick={LoginThrowGoggle} aria-label="Log in with Google" className="p-3 rounded-sm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 32 32"
