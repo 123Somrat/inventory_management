@@ -75,11 +75,15 @@ export default function Login() {
       //login throw goggle
       const LoginThrowGoggle = ()=>{
         loginUserWithGoggle()
-        .then(res=>Swal.fire({
-          title: "Success!",
-          text: "User login successfully!",
-          icon: "success",
-        }))
+        .then((res)=>{
+          Swal.fire({
+            title: "Success!",
+            text: "User login successfully!",
+            icon: "success",
+            
+          })
+          navigate('/createshop')
+        })
         .catch(err=>Swal.fire({
           title: "Error!",
           text: "SomeThing is wrong!",
