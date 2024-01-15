@@ -1,8 +1,9 @@
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import { useContext } from "react";
 import { MdOutlineInventory } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/Providers";
+import './NavBar.css'
 export default function NavBar() {
 const {logOut,user} = useContext(AuthContext)
 const navigate = useNavigate()
@@ -46,8 +47,8 @@ const navigate = useNavigate()
                 name@flowbite.com
               </span>
             </Dropdown.Header>
-            <Dropdown.Item><Link to={"dashboard"}>Dashboard</Link></Dropdown.Item>
-            <Dropdown.Item><Link to={""}>Settings</Link></Dropdown.Item>
+            <Dropdown.Item><NavLink to={"dashboard"}>Dashboard</NavLink></Dropdown.Item>
+            <Dropdown.Item><NavLink to={""}>Settings</NavLink></Dropdown.Item>
             <Dropdown.Item>Earnings</Dropdown.Item>
             <Dropdown.Divider />
             <Dropdown.Item onClick={signOut}>Log out</Dropdown.Item>
@@ -55,13 +56,13 @@ const navigate = useNavigate()
           <Navbar.Toggle />
         </div>
         <Navbar.Collapse>
-          <Link href="/" className="hover:text-cyan-800">
+          <NavLink to="/" className="hover:text-cyan-800">
             Home
-          </Link>
-          {user ? <p className="hover:text-cyan-800" onClick={signOut}>Logout</p> : <Link to={"/auth/login"} className="hover:text-cyan-800">Login</Link> }
-          {user ?<Link to={"/dashboard"} className="hover:text-cyan-800">Dashboard</Link> :  <Link to="/auth/register" className="hover:text-cyan-800">Register</Link>}
-          <Link to="/createshop" className="hover:text-cyan-800">Create Store</Link>
-          <Link  to="/watchdemo" target="_blank" className="hover:text-cyan-800" >Watch Demo</Link>
+          </NavLink>
+          {user ? <p className="hover:text-cyan-800" onClick={signOut}>Logout</p> : <NavLink to={"/auth/login"} className="hover:text-cyan-800">Login</NavLink> }
+          {user ?<NavLink to={"/dashboard"} className="hover:text-cyan-800">Dashboard</NavLink> :  <NavLink to="/auth/register" className="hover:text-cyan-800">Register</NavLink>}
+          <NavLink to="/createshop" className="hover:text-cyan-800">Create Store</NavLink>
+          <NavLink  to="/watchdemo" target="_blank" className="hover:text-cyan-800" >Watch Demo</NavLink>
         </Navbar.Collapse>
       </Navbar>
       <>
