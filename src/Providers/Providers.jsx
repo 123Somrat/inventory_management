@@ -1,9 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import auth from "../FirebaseConfig/FireBaseConfig";
-import { createUserWithEmailAndPassword , signInWithEmailAndPassword , signOut , onAuthStateChanged} from "firebase/auth";
+import { createUserWithEmailAndPassword , signInWithEmailAndPassword , signOut , onAuthStateChanged , GoogleAuthProvider } from "firebase/auth";
 import Swal from "sweetalert2";
-import { Navigate } from "react-router-dom";
-import useUserhaveStoreOrNot from "../Hooks/useUserhaveStoreOrNot";
 import useAxios from "../Hooks/useAxios";
 // create context
 export const AuthContext = createContext();
